@@ -1,3 +1,4 @@
+import 'package:coffeeshop/state_management/core/constants.dart';
 import 'package:flutter/material.dart';
 
 class ShopPageProductView extends StatelessWidget {
@@ -16,7 +17,7 @@ class ShopPageProductView extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         SizedBox(
-          width: 150,
+          width: productHeight,
           child: Image.asset(image!),
         ),
         Text(

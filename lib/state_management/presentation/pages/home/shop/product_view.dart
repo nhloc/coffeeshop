@@ -1,3 +1,4 @@
+import 'package:coffeeshop/state_management/core/constants.dart';
 import 'package:flutter/material.dart';
 
 class ProductView extends StatelessWidget {
@@ -16,22 +17,25 @@ class ProductView extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         SizedBox(
-          height: 70,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                name!,
-              ),
-              Text(
-                price!,
-              )
-            ],
+          height: productItemHeight,
+          child: Padding(
+            padding: const EdgeInsets.only(top: 5, bottom: 5),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  name!,
+                ),
+                Text(
+                  price!,
+                )
+              ],
+            ),
           ),
         ),
         SizedBox(
-          width: 70,
+          width: productItemHeight - 10,
           child: Image.asset(image!),
         )
       ],

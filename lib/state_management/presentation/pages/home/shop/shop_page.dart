@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:coffeeshop/state_management/core/constants.dart';
 import 'package:coffeeshop/state_management/core/data_product.dart';
 import 'package:coffeeshop/state_management/domain/entities/product.dart';
@@ -11,7 +9,6 @@ import 'package:coffeeshop/state_management/presentation/pages/home/shop/shop_pa
 import 'package:coffeeshop/state_management/presentation/pages/home/shop/shop_page_product_category.dart';
 import 'package:coffeeshop/state_management/presentation/pages/home/shop/shop_page_product_view.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get_connect/http/src/utils/utils.dart';
 
 class ShopPage extends StatefulWidget {
   const ShopPage(
@@ -33,7 +30,12 @@ class _ShopPageState extends State<ShopPage> {
   final List<ProductCategory> items = DataProduct.items;
   final data = DataProduct.items[0].products;
   final scrollController = ScrollController();
-  double heightInfor = appBarHeight + appInforHeight*2 + 60 - appBarPinnedHeight;
+  double heightInfor = appBarHeight +
+      appInforHeight +
+      25 +
+      itemHeight * 2 +
+      defautltVertical * 2 -
+      appBarPinnedHeight;
   int selectTab = 0;
   List<double> breakPoints = [];
   List<ProductItem> productItem = [];
@@ -55,7 +57,9 @@ class _ShopPageState extends State<ShopPage> {
         totalItem += items[i].products!.length;
       }
       scrollController.animateTo(
-        heightInfor + (heightItem * totalItem) + heightCategoryItem * index,
+        heightInfor +
+            (productItemHeight * totalItem) +
+            categoryItemHeight * index,
         duration: const Duration(microseconds: 500),
         curve: Curves.ease,
       );
@@ -76,13 +80,14 @@ class _ShopPageState extends State<ShopPage> {
 
   void createBreakPoint() {
     double breakPoint0 = heightInfor +
-        heightCategoryItem +
-        heightItem * items[0].products!.length;
+        categoryItemHeight +
+        productItemHeight * items[0].products!.length;
     breakPoints.add(breakPoint0);
+
     for (int i = 1; i < items.length; i++) {
       double breakPoint = breakPoints.last +
-          heightCategoryItem +
-          heightItem * items[i].products!.length;
+          categoryItemHeight +
+          productItemHeight * items[i].products!.length;
       breakPoints.add(breakPoint);
     }
   }
@@ -95,7 +100,7 @@ class _ShopPageState extends State<ShopPage> {
             selectTab = 0;
           });
         }
-      } else if (breakPoints[i - 1] <= offset && offset < breakPoints[i]) {
+      } else if (breakPoints[i - 1] <= offset && offset <= breakPoints[i]) {
         if (selectTab != i) {
           setState(() {
             selectTab = i;
@@ -113,10 +118,10 @@ class _ShopPageState extends State<ShopPage> {
         slivers: [
           ShopPageAppBar(image: widget.image),
           SliverPadding(
-            padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+            padding: const EdgeInsets.only(left: 10, right: 10, top: 5),
             sliver: SliverToBoxAdapter(
               child: SizedBox(
-                height: appInforHeight,
+                height: 150,
                 child: Column(
                   children: [
                     Text(
@@ -173,37 +178,43 @@ class _ShopPageState extends State<ShopPage> {
             ),
           ),
           SliverPadding(
-            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+            padding: const EdgeInsets.only(left: 10, right: 10, top: 5),
             sliver: SliverToBoxAdapter(
-              child: Row(
-                children: const [
-                  Text(
-                    'Lựa chon nhiều nhất',
-                    style: TextStyle(
-                        fontSize: defautltTextSize16,
-                        fontWeight: FontWeight.bold),
-                  )
-                ],
+              child: SizedBox(
+                height: 20,
+                child: Row(
+                  children: const [
+                    Text(
+                      'Lựa chon nhiều nhất',
+                      style: TextStyle(
+                          fontSize: defautltTextSize16,
+                          fontWeight: FontWeight.bold),
+                    )
+                  ],
+                ),
               ),
             ),
           ),
           SliverPadding(
-            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+            padding: const EdgeInsets.only(left: 10, right: 10, top: 5),
             sliver: SliverToBoxAdapter(
               child: SingleChildScrollView(
                 scrollDirection: Axis.horizontal,
-                child: Row(
-                  children: List.generate(5, (index) {
-                    Product pro = data![index];
-                    return Padding(
-                      padding: const EdgeInsets.only(right: 10),
-                      child: ShopPageProductView(
-                        image: pro.image,
-                        name: pro.name,
-                        price: pro.price,
-                      ),
-                    );
-                  }),
+                child: SizedBox(
+                  height: itemHeight * 2,
+                  child: Row(
+                    children: List.generate(5, (index) {
+                      Product pro = data![index];
+                      return Padding(
+                        padding: const EdgeInsets.only(right: 10),
+                        child: ShopPageProductView(
+                          image: pro.image,
+                          name: pro.name,
+                          price: pro.price,
+                        ),
+                      );
+                    }),
+                  ),
                 ),
               ),
             ),
@@ -215,7 +226,8 @@ class _ShopPageState extends State<ShopPage> {
                 selectedIndex: selectTab,
               )),
           SliverPadding(
-            padding: const EdgeInsets.only(left: defautltHorizontal),
+            padding: const EdgeInsets.only(
+                left: defautltHorizontal, right: defautltHorizontal),
             sliver: SliverList(
               delegate: SliverChildBuilderDelegate(
                 (context, categoryIndex) {

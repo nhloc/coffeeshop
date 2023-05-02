@@ -12,7 +12,7 @@ class StateManagenment extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       home: const SplashPage(),
-      initialRoute: AppRoutes.home,
+      initialRoute: AppRoutes.splash,
       getPages: AppPages.pages,
       initialBinding: MainBinding(),
       theme: ThemeData(fontFamily: "Inter"),

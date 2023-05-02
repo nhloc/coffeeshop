@@ -7,7 +7,7 @@ class ProductCategoryPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        height: heightCategoryItem,
+        height: categoryItemHeight,
         alignment: Alignment.centerLeft,
         color: Colors.white,
         child: Text(

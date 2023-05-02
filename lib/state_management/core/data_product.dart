@@ -167,6 +167,7 @@ class DataProduct {
           image: "assets/images/product_3.jpg",
         ),
       ],
-    )
+    ),
+   
   ];
 }
