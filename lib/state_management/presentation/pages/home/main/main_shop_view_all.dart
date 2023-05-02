@@ -1,4 +1,6 @@
+import 'package:coffeeshop/state_management/presentation/pages/home/shop/shop_page.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class MainShopViewAll extends StatelessWidget {
   const MainShopViewAll(
@@ -11,7 +13,12 @@ class MainShopViewAll extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => print(name!),
+      onTap: () => Get.to(() => ShopPage(
+            name: name,
+            address: address,
+            image: image,
+            rating: rating,
+          )),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

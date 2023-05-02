@@ -5,6 +5,7 @@ import 'package:coffeeshop/state_management/presentation/bindings/splash/splash_
 import 'package:coffeeshop/state_management/presentation/pages/auth/login_page.dart';
 import 'package:coffeeshop/state_management/presentation/pages/auth/register_page.dart';
 import 'package:coffeeshop/state_management/presentation/pages/home/home_page.dart';
+import 'package:coffeeshop/state_management/presentation/pages/home/shop/shop_page.dart';
 import 'package:coffeeshop/state_management/presentation/pages/splash/splash_page.dart';
 import 'package:coffeeshop/state_management/presentation/routes/app_routes.dart';
 import 'package:get/get.dart';
@@ -24,6 +25,9 @@ class AppPages {
         page: () => const RegisterPage(),
         binding: RegisterBinding()),
     GetPage(
-        name: AppRoutes.home, page: () => HomePage(), binding: HomeBinding()),
+      name: AppRoutes.home,
+      page: () => HomePage(),
+      binding: HomeBinding(),
+    ),
   ];
 }

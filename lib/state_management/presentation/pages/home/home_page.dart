@@ -1,6 +1,5 @@
 import 'package:coffeeshop/state_management/core/constants.dart';
 import 'package:coffeeshop/state_management/core/data_shop.dart';
-import 'package:coffeeshop/state_management/core/master_images.dart';
 import 'package:coffeeshop/state_management/domain/entities/shop.dart';
 import 'package:coffeeshop/state_management/presentation/pages/home/main/main_page_view.dart';
 import 'package:coffeeshop/state_management/presentation/pages/home/main/main_shop_view.dart';
@@ -76,6 +75,7 @@ class HomePage extends StatelessWidget {
                         image: shop.image,
                         name: shop.name,
                         rating: shop.rating,
+                        address: shop.address,
                       ));
                 })),
               ),
@@ -112,6 +112,7 @@ class HomePage extends StatelessWidget {
                         image: shop.image,
                         name: shop.name,
                         rating: shop.rating,
+                        address: shop.address,
                       ));
                 })),
               ),
