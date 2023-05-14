@@ -37,8 +37,8 @@ class LoginPage extends StatelessWidget {
                 padding:
                     const EdgeInsets.symmetric(horizontal: defautltHorizontal),
                 child: Column(children: [
-                  Row(
-                    children: const [
+                  const Row(
+                    children: [
                       Text(
                         'Login',
                         textAlign: TextAlign.left,
